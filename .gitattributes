@@ -1,0 +1,9 @@
+# set default line endings to auto
+* text=auto
+# files that end with .sh should have lf line endings
+*.sh text eol=lf
+# files that end with .conf should have lf line endings
+*.conf text eol=lf
+
+# dockerfile should have lf line endings
+Dockerfile text eol=lf
