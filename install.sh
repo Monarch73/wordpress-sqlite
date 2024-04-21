@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 #echo "sed'ing www.conf to use ondemand pm"
 #sed -i 's/pm = dynamic/pm = ondemand/g' /usr/local/etc/php-fpm.d/www.conf
 
@@ -17,11 +18,11 @@ echo "download Sqlite integration plugin"
 curl -L -o /tmp/sqlite-database-integration.tar.gz "https://github.com/WordPress/sqlite-database-integration/archive/refs/tags/v2.1.9.tar.gz"
 
 echo "untar Sqlite integration plugin"
-tar zxvf sqlite-database-integration.tar.gz -c /tmp/
+tar zxvf /tmp/sqlite-database-integration.tar.gz -C /tmp/
 
 #install
 mkdir -p /usr/src/wordpress/wp-content/mu-plugins/sqlite-database-integration 
-cp -r /tmp/sqlite-database-integration/* /usr/src/wordpress/wp-content/mu-plugins/sqlite-database-integration/
+cp -r /tmp/sqlite-database-integration-2.1.9/* /usr/src/wordpress/wp-content/mu-plugins/sqlite-database-integration/
 mv "/usr/src/wordpress/wp-content/mu-plugins/sqlite-database-integration/db.copy" "/usr/src/wordpress/wp-content/db.php"
 sed -i 's#{SQLITE_IMPLEMENTATION_FOLDER_PATH}#/var/www/html/wp-content/mu-plugins/sqlite-database-integration#' "/usr/src/wordpress/wp-content/db.php"
 sed -i 's#{SQLITE_PLUGIN}#sqlite-database-integration/load.php#' "/usr/src/wordpress/wp-content/db.php"
