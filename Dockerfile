@@ -1,10 +1,5 @@
-#FROM wordpress:fpm
-FROM wordpress:fpm-alpine
+FROM wordpress:6.5.2-php8.1-fpm-alpine
 
 COPY . /tmp
-WORKDIR /tmp
-RUN sh /tmp/install.sh
+RUN chmod 777 /tmp/install.sh && /bin/bash /tmp/install.sh
 
-# Pm ondemand to save RAM
-
-VOLUME ["/var/www/db"]

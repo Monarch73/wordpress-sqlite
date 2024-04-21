@@ -1,9 +1,13 @@
 #!/bin/bash
-echo "sed'ing www.conf to use ondemand pm"
-sed -i 's/pm = dynamic/pm = ondemand/g' /usr/local/etc/php-fpm.d/www.conf
+#echo "sed'ing www.conf to use ondemand pm"
+#sed -i 's/pm = dynamic/pm = ondemand/g' /usr/local/etc/php-fpm.d/www.conf
+
+# insert line "exec nginx" before a line containing 'exec "$@"' in /usr/local/bin/docker-entrypoint.sh using sed
+sed -i '/exec "$@"/i exec nginx' /usr/local/bin/docker-entrypoint.sh
 
 echo "installing curl and unzip"
 apk add --update curl unzip
+apk add nginx
 
 echo "clear cache"
 rm -Rf /var/cache/apk/*
@@ -20,7 +24,7 @@ rm /tmp/wpplugin.zip
 
 echo "setting up wp-config.php"
 cp /usr/src/wordpress/wp-content/plugins/sqlite-integration/db.php /usr/src/wordpress/wp-content
-
+cp /tmp/default.conf /etc/nginx/http.d/default.conf
 
 echo "copying wp-config.php"
 cp config/wp-config.php /var/www/wp-config.php
