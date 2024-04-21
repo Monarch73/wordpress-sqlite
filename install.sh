@@ -23,11 +23,11 @@ echo "removing zip file"
 rm /tmp/wpplugin.zip
 
 echo "setting up wp-config.php"
-cp /usr/src/wordpress/wp-content/plugins/sqlite-integration/db.php /usr/src/wordpress/wp-content
+cp /usr/src/wordpress/wp-content/plugins/sqlite-database-integration/wp-includes/sqlite/db.php /usr/src/wordpress/wp-content
 cp /tmp/default.conf /etc/nginx/http.d/default.conf
 
 echo "copying wp-config.php"
-cp config/wp-config.php /var/www/wp-config.php
+cp /tmp/config/wp-config.php /var/www/wp-config.php
 
 echo "chown wp-config.php"
 chown www-data:www-data /var/www/wp-config.php
